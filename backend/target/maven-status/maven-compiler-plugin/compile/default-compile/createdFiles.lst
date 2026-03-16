@@ -1,0 +1,16 @@
+com\malayadi\church\repository\PhotoRepository.class
+com\malayadi\church\repository\EventRepository.class
+com\malayadi\church\entity\Photo.class
+com\malayadi\church\controller\AdminController.class
+com\malayadi\church\config\CorsConfig$1.class
+com\malayadi\church\entity\Pastor.class
+com\malayadi\church\controller\PublicController.class
+com\malayadi\church\repository\FestivalRepository.class
+com\malayadi\church\entity\Event.class
+com\malayadi\church\entity\Festival.class
+com\malayadi\church\entity\ServiceTime.class
+com\malayadi\church\ChurchApplication.class
+com\malayadi\church\repository\PastorRepository.class
+com\malayadi\church\config\CorsConfig.class
+com\malayadi\church\repository\ServiceTimeRepository.class
+com\malayadi\church\config\WebConfig.class

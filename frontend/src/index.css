@@ -1,9 +1,13 @@
 :root {
   --primary-color: #ffffff;
-  --secondary-color: #fcfcfd;
-  --accent-color: #cda434; /* Elegant gold for Christian concept */
-  --text-dark: #1a202c;
-  --text-light: #718096;
+  --secondary-color: #f8f9fa; /* Classic clean off-white */
+  --accent-blue: #4285f4;
+  --accent-red: #ea4335;
+  --accent-yellow: #fbbc05;
+  --accent-green: #34a853;
+  --accent-color: var(--accent-blue); /* Default accent to blue */
+  --text-dark: #202124;
+  --text-light: #5f6368;
   --transition-speed: 0.4s;
 }
 
@@ -13,8 +17,10 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--secondary-color);
+  font-family: 'Inter', 'Lora', serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(-45deg, #f8f9fa, #e8f0fe, #fce8e6, #fef7e0, #e6f4ea);
+  background-size: 400% 400%;
+  animation: floatBackground 25s ease infinite;
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,8 +37,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 5%;
-  background-color: var(--primary-color);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  background-color: #e2e8f0; /* More noticeable cool gray */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -77,8 +83,14 @@ nav a::after {
 }
 
 nav a:hover {
-  color: var(--accent-color);
+  color: var(--accent-blue);
 }
+
+nav a:nth-child(1):hover::after { background-color: var(--accent-blue); }
+nav a:nth-child(2):hover::after { background-color: var(--accent-red); }
+nav a:nth-child(3):hover::after { background-color: var(--accent-yellow); }
+nav a:nth-child(4):hover::after { background-color: var(--accent-green); }
+nav a:nth-child(5):hover::after { background-color: var(--accent-blue); }
 
 nav a:hover::after {
   width: 100%;
@@ -109,14 +121,19 @@ nav a:hover::after {
 }
 
 @keyframes gentlePulse {
-  0%, 100% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 10px rgba(205, 164, 52, 0.2); }
-  50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 20px rgba(205, 164, 52, 0.5); }
+  0%, 100% { opacity: 0.8; transform: scale(1); text-shadow: 0 0 10px rgba(66, 133, 244, 0.3); }
+  50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 20px rgba(66, 133, 244, 0.6); }
 }
 
 @keyframes floatBackground {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes aggressivePulse {
+  0% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 10px rgba(139, 0, 0, 0.2)); opacity: 0.15; }
+  100% { transform: translate(-50%, -50%) scale(1.05); filter: drop-shadow(0 0 30px rgba(139, 0, 0, 0.5)) drop-shadow(0 0 50px rgba(255, 0, 0, 0.2)); opacity: 0.35; }
 }
 
 /* Base Layouts */
@@ -168,15 +185,16 @@ h2 {
 /* Hero Section */
 .hero {
   position: relative;
-  height: 70vh;
+  min-height: calc(100vh - 76px); /* Full view minus the navbar */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(-45deg, #ffffff, #fdfbf7, #f7f9fa, #ffffff);
+  /* Highly vibrant, moving background gradient without the image */
+  background: linear-gradient(-45deg, #a18cd1, #fbc2eb, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
   background-size: 400% 400%;
-  animation: floatBackground 15s ease infinite;
+  animation: floatBackground 8s ease infinite;
 }
 
 .hero-content {
@@ -206,14 +224,12 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 25rem;
-  color: rgba(205, 164, 52, 0.03);
+  width: 50vh;
+  height: 50vh;
+  color: #8b0000; /* Dark Red */
   z-index: 0;
   pointer-events: none;
-  font-family: serif;
-}
-.cross-silhouette::before {
-  content: '†';
+  animation: aggressivePulse 2s infinite alternate ease-in-out;
 }
 
 .welcome-message {
@@ -229,6 +245,44 @@ h2 {
   color: var(--text-light);
 }
 
+/* Minimal Icons */
+.spiritual-icons {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-dove {
+  width: 48px;
+  height: 48px;
+  opacity: 0.8;
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+.icon-flame {
+  width: 36px;
+  height: 36px;
+  opacity: 0.7;
+}
+
+.icon-center {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+}
+
+.icon-small {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 /* Cards & Grids */
 .grid {
   display: grid;
@@ -237,17 +291,19 @@ h2 {
 }
 
 .card {
-  background: var(--primary-color);
+  background: rgba(255, 255, 255, 0.85); /* Slightly transparent to show background animation */
+  backdrop-filter: blur(10px);
   padding: 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-  border: 1px solid rgba(0,0,0,0.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, background 0.4s;
+  border: 1px solid rgba(255,255,255,0.4);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .service-card {
@@ -257,7 +313,7 @@ h2 {
 .service-card .time {
   font-size: 2.2rem;
   font-weight: 300;
-  color: var(--accent-color);
+  color: var(--accent-green);
   margin: 1rem 0;
 }
 
@@ -284,28 +340,30 @@ input:focus {
 }
 
 .btn {
-  background-color: var(--text-dark);
+  background-color: var(--accent-blue);
   color: white;
   padding: 1rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
   font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .btn:hover {
-  background-color: var(--accent-color);
+  background-color: #3b78e7; /* Slightly darker blue */
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .btn-danger {
-  background-color: #fc8181;
+  background-color: var(--accent-red);
 }
 
 .btn-danger:hover {
-  background-color: #e53e3e;
+  background-color: #d93025; /* Slightly darker red */
 }
 
 .list {
@@ -314,8 +372,15 @@ input:focus {
 }
 
 .list li {
-  padding: 1.5rem 0;
+  padding: 1.5rem 1rem;
   border-bottom: 1px solid #edf2f7;
+  transition: transform 0.3s, background-color 0.3s, border-radius 0.3s;
+}
+
+.list li:hover {
+  transform: translateX(10px);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
 }
 
 .list li:last-child {
@@ -340,4 +405,131 @@ input:focus {
 
 .admin-section {
   margin-bottom: 3rem;
+}
+
+/* Custom React Calendar Styles */
+.react-calendar-custom {
+  border: none !important;
+  background: transparent !important;
+  font-family: inherit !important;
+  width: 100% !important;
+  max-width: 400px;
+}
+
+.react-calendar__navigation button {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: transparent !important;
+  color: var(--accent-blue);
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: var(--accent-red) !important;
+}
+
+.react-calendar__tile {
+  padding: 1em 0.5em !important;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: var(--secondary-color) !important;
+  color: var(--text-dark);
+}
+
+.react-calendar__tile--now {
+  background: #e8f0fe !important;
+  color: var(--accent-blue) !important;
+  font-weight: bold;
+}
+
+.react-calendar__tile--active {
+  background: var(--accent-blue) !important;
+  color: white !important;
+  box-shadow: 0 4px 10px rgba(66, 133, 244, 0.4);
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #3b78e7 !important;
+}
+
+/* Running Image Gallery */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+}
+
+.marquee-content {
+  display: inline-flex;
+  gap: 1.5rem;
+  padding-left: 1.5rem;
+  animation: scrollMarquee 25s linear infinite;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+.marquee-content img {
+  height: 250px;
+  width: auto;
+  min-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.marquee-content img:hover {
+  transform: scale(1.02);
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.75rem)); }
+}
+
+/* Pastor Photo in Hero */
+.pastor-photo-container {
+  position: absolute;
+  top: 2rem;
+  right: 5%;
+  z-index: 10;
+  border-radius: 16px; /* Soft rounded corners */
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  background-color: var(--white);
+  padding: 4px; /* Creates a slight white border effect */
+}
+
+.pastor-photo-container:hover {
+  transform: scale(1.25); /* Grow on hover */
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+.pastor-photo {
+  width: 130px;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px; /* Inner image rounding */
 }

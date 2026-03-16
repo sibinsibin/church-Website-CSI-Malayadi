@@ -26,6 +26,12 @@ public class PublicController {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private com.malayadi.church.repository.PhotoRepository photoRepository;
+
+    @Autowired
+    private com.malayadi.church.repository.PastorRepository pastorRepository;
+
     @GetMapping("/services")
     public List<ServiceTime> getServices() {
         return serviceTimeRepository.findAll();
@@ -39,5 +45,15 @@ public class PublicController {
     @GetMapping("/events")
     public List<Event> getEvents() {
         return eventRepository.findAll();
+    }
+
+    @GetMapping("/photos")
+    public List<com.malayadi.church.entity.Photo> getPhotos() {
+        return photoRepository.findAll();
+    }
+
+    @GetMapping("/pastor")
+    public com.malayadi.church.entity.Pastor getPastor() {
+        return pastorRepository.findAll().stream().findFirst().orElse(null);
     }
 }
